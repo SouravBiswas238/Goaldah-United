@@ -1,7 +1,7 @@
 const db = require('../config/db');
 
 const createTable = async () => {
-    const query = `
+  const query = `
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
       phone VARCHAR(20) UNIQUE NOT NULL,
@@ -13,12 +13,12 @@ const createTable = async () => {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   `;
-    try {
-        await db.query(query);
-        console.log('Users table created or already exists');
-    } catch (err) {
-        console.error('Error creating users table:', err);
-    }
+  try {
+    await db.query(query);
+    console.log('Users table created or already exists');
+  } catch (err) {
+    console.error('Error creating users table:', err);
+  }
 };
 
 module.exports = { createTable };
