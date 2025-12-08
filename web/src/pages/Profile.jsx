@@ -86,7 +86,8 @@ const Profile = () => {
             setMessage({ type: 'success', text: 'Profile updated successfully!' });
         } catch (error) {
             console.error('Failed to update profile', error);
-            setMessage({ type: 'error', text: error.response?.data?.message || 'Failed to update profile' });
+            const errorMsg = error.response?.data?.message || 'Failed to update profile';
+            setMessage({ type: 'error', text: errorMsg });
         } finally {
             setLoading(false);
         }
