@@ -10,6 +10,8 @@ const createTable = async () => {
       role VARCHAR(20) DEFAULT 'member', -- member, admin, executive
       status VARCHAR(20) DEFAULT 'pending', -- pending, active
       profile_picture VARCHAR(255),
+      profile_picture_data BYTEA,
+      mime_type VARCHAR(50),
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   `;

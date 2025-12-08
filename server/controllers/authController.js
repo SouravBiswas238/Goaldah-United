@@ -17,7 +17,7 @@ const register = async (req, res) => {
 
         // Create user
         const newUser = await db.query(
-            'INSERT INTO users (phone, password_hash, name) VALUES ($1, $2, $3) RETURNING id, phone, name, role',
+            'INSERT INTO users (phone, password_hash, name) VALUES ($1, $2, $3) RETURNING id, phone, name, role, status, profile_picture, created_at',
             [phone, passwordHash, name]
         );
 
@@ -61,6 +61,9 @@ const login = async (req, res) => {
                 phone: user.phone,
                 name: user.name,
                 role: user.role,
+                status: user.status,
+                profile_picture: user.profile_picture,
+                created_at: user.created_at
             },
         });
     } catch (err) {
