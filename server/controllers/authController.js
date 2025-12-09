@@ -63,6 +63,7 @@ const login = async (req, res) => {
                 role: user.role,
                 status: user.status,
                 profile_picture: user.profile_picture,
+                blood_group: user.blood_group,
                 created_at: user.created_at
             },
         });

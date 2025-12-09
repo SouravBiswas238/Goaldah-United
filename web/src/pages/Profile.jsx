@@ -9,6 +9,7 @@ const Profile = () => {
         name: '',
         phone: '',
         profile_picture: '',
+        blood_group: '',
         role: '',
         status: ''
     });
@@ -24,6 +25,7 @@ const Profile = () => {
                 name: user.name || '',
                 phone: user.phone || '',
                 profile_picture: user.profile_picture || '',
+                blood_group: user.blood_group || '',
                 role: user.role || '',
                 status: user.status || ''
             });
@@ -72,7 +74,8 @@ const Profile = () => {
             // 2. Update Profile Data (Name and potentially new Profile Picture URL)
             const response = await api.put(`/members/${user.id}`, {
                 name: formData.name,
-                profile_picture: currentProfilePic
+                profile_picture: currentProfilePic,
+                blood_group: formData.blood_group
             });
 
             // 3. Update local user state
@@ -156,6 +159,28 @@ const Profile = () => {
                                         required
                                     />
                                 </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Blood Group
+                                </label>
+                                <select
+                                    name="blood_group"
+                                    value={formData.blood_group}
+                                    onChange={handleChange}
+                                    className="block w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors"
+                                >
+                                    <option value="">Select Blood Group</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
                             </div>
 
                             <div>

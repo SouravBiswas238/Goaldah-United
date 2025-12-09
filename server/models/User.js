@@ -12,6 +12,7 @@ const createTable = async () => {
       profile_picture VARCHAR(255),
       profile_picture_data BYTEA,
       mime_type VARCHAR(50),
+      blood_group VARCHAR(5),
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   `;

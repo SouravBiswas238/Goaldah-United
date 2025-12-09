@@ -11,6 +11,7 @@ import Users from './pages/admin/Users';
 import AdminEvents from './pages/admin/Events'; // Renamed to avoid conflict
 import MemberEvents from './pages/Events';
 import Profile from './pages/Profile'; // New import
+import Finance from './pages/Finance'; // Added
 
 const ProtectedRoute = ({ children, requiredRole }) => {
     const { user, loading } = useAuth();

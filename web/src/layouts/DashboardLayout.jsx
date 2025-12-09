@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -9,7 +10,8 @@ import {
     Menu,
     X,
     Settings,
-    User
+    User,
+    DollarSign
 } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -26,6 +28,7 @@ const DashboardLayout = () => {
 
     const navItems = [
         { label: 'Dashboard', path: user?.role === 'admin' ? '/admin' : '/dashboard', icon: LayoutDashboard },
+        { label: 'Finance', path: '/finance', icon: DollarSign }, // Added Finance item
         ...(user?.role === 'admin' ? [
             { label: 'Members', path: '/admin/users', icon: Users },
             { label: 'Events', path: '/admin/events', icon: Calendar },

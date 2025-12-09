@@ -5,7 +5,7 @@ const db = require('../config/db');
 // @access  Private
 const getMembers = async (req, res) => {
     try {
-        const result = await db.query('SELECT id, name, phone, role, status, profile_picture, created_at FROM users ORDER BY created_at DESC');
+        const result = await db.query('SELECT id, name, phone, role, status, profile_picture, blood_group, created_at FROM users ORDER BY created_at DESC');
         res.json(result.rows);
     } catch (err) {
         console.error(err);
@@ -17,7 +17,7 @@ const getMembers = async (req, res) => {
 // @route   PUT /api/members/:id
 // @access  Private
 const updateProfile = async (req, res) => {
-    const { name, profile_picture } = req.body;
+    const { name, profile_picture, blood_group } = req.body;
     const userId = req.params.id;
 
     // Ensure user is updating their own profile or is admin
@@ -27,8 +27,8 @@ const updateProfile = async (req, res) => {
 
     try {
         const result = await db.query(
-            'UPDATE users SET name = $1, profile_picture = $2 WHERE id = $3 RETURNING id, name, phone, role, profile_picture',
-            [name, profile_picture, userId]
+            'UPDATE users SET name = $1, profile_picture = $2, blood_group = $3 WHERE id = $4 RETURNING id, name, phone, role, profile_picture, blood_group',
+            [name, profile_picture, blood_group, userId]
         );
 
         if (result.rows.length === 0) {
