@@ -68,6 +68,14 @@ const Router = () => {
                     ),
                 },
                 {
+                    path: 'finance',
+                    element: (
+                        <ProtectedRoute>
+                            <Finance />
+                        </ProtectedRoute>
+                    ),
+                },
+                {
                     path: 'events',
                     element: (
                         <ProtectedRoute>
