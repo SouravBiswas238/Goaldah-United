@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import {
   DollarSign,
@@ -16,10 +17,12 @@ import {
   CheckCircle,
   ArrowUpCircle,
   ArrowDownCircle,
+  Plus,
 } from "lucide-react";
 
 const Dashboard = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [summary, setSummary] = useState({
     totalFund: 0,
     totalExpenses: 0,
@@ -205,6 +208,13 @@ const Dashboard = () => {
                 })}
               </p>
             </div>
+            <button
+              onClick={() => navigate("/finance")}
+              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition-colors"
+            >
+              <Plus className="h-4 w-4" />
+              <span>টাকা জমা দিন</span>
+            </button>
           </div>
         </div>
 
@@ -496,12 +506,9 @@ const Dashboard = () => {
                           key={contrib.id}
                           className="bg-white rounded-lg p-3 shadow-sm border border-gray-200"
                         >
-                          <div className="flex justify-between items-start mb-2">
+                          <div className="mb-2">
                             <span className="font-semibold text-base text-gray-900">
                               ৳{parseFloat(contrib.amount).toLocaleString()}
-                            </span>
-                            <span className="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-xs font-medium">
-                              {contrib.payment_method}
                             </span>
                           </div>
                           <div className="space-y-1 text-xs text-gray-600">
@@ -539,9 +546,6 @@ const Dashboard = () => {
                             <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700">
                               মাস
                             </th>
-                            <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700">
-                              পেমেন্ট পদ্ধতি
-                            </th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
@@ -565,11 +569,6 @@ const Dashboard = () => {
                                       .toISOString()
                                       .slice(0, 7)
                                 )}
-                              </td>
-                              <td className="px-4 py-2.5">
-                                <span className="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-xs font-medium">
-                                  {contrib.method}
-                                </span>
                               </td>
                             </tr>
                           ))}
@@ -682,9 +681,6 @@ const Dashboard = () => {
                         <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700">
                           তারিখ
                         </th>
-                        <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-700">
-                          পেমেন্ট পদ্ধতি
-                        </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
@@ -710,11 +706,6 @@ const Dashboard = () => {
                           </td>
                           <td className="px-4 py-2.5 text-xs text-gray-600">
                             {new Date(contrib.date).toLocaleDateString("bn-BD")}
-                          </td>
-                          <td className="px-4 py-2.5">
-                            <span className="bg-rose-100 text-rose-700 px-2 py-0.5 rounded text-xs font-medium">
-                              {contrib.method}
-                            </span>
                           </td>
                         </tr>
                       ))}
@@ -791,9 +782,6 @@ const Dashboard = () => {
                             contrib.month ||
                               new Date(contrib.date).toISOString().slice(0, 7)
                           )}
-                        </span>
-                        <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium">
-                          {contrib.payment_method}
                         </span>
                       </div>
                     </div>
