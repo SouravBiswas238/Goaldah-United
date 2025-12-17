@@ -3,16 +3,23 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// const pool = new Pool({
-//     connectionString: process.env.DATABASE_URL,
-// });
-const pool = new Pool({
-    host: "localhost",
-    user: "postgres",
-    port: 5432,
-    password: "admin",
-    database: "goaldah"
-})
+const isProduction = true;
+const connectionString = 'postgresql://postgres.ntrnurvfnutomhgsoxto:Sourav23@1$@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?pgbouncer=true'
+
+const poolConfig = connectionString
+    ? {
+        connectionString,
+        ssl: isProduction ? { rejectUnauthorized: false } : false,
+    }
+    : {
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        port: process.env.DB_PORT,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+    };
+
+const pool = new Pool(poolConfig);
 pool.on('connect', () => {
     console.log('Connected to the PostgreSQL database');
 });
